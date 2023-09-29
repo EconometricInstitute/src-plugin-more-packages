@@ -1,0 +1,19 @@
+---
+- name: Install required snap packages
+  block:
+  - name: Install classic snap packages
+    command: "snap install {{item}} --classic"
+    apt:
+      deb: "{{item}}"
+      allow_unauthenticated: yes
+    with_items: "{{req.snap.classic}}"
+    when: req.snap.classic is defined
+
+  - name: Install regular snap packages
+    command: "snap install {{item}}"
+    apt:
+      deb: "{{item}}"
+      allow_unauthenticated: yes
+    with_items: "{{req.snap.regular}}"
+    when: req.snap.regular is defined    
+  when: req.snap is defined

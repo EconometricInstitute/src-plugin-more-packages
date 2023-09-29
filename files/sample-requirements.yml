@@ -1,0 +1,13 @@
+---
+snap:
+  # The classic part is used for snaps that must be installed using the --classic flag
+  classic:
+  - pycharm-community
+  - intellij-idea-community
+  # The regular part is used for snaps that can be installed without the --classic flag
+  regular:
+  - postman
+
+r:
+ - tidyverse
+ - tinymodels

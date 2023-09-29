@@ -1,0 +1,12 @@
+---
+- name: Install R and Snap packages as given in a specified file
+  hosts: localhost
+  gather_facts: true
+  become: true
+
+  tasks:
+    - include_tasks: 10-get-requirements-file.yml
+    - include_tasks: 50-install-r-packages.yml
+    - include_tasks: 60-install-snap-packages.yml
+
+
