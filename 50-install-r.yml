@@ -1,0 +1,25 @@
+---
+- name: Install R packages into the system library
+  block:
+  - name: Add repository key of the R-project
+    apt_key:
+      keyserver: keyserver.ubuntu.com
+      id: "E298A3A825C0D65DFD57CBB651716619E084DAB9"
+  - name: Add apt repository of the R-project
+    apt_repository:
+      # TODO: should this become configurable in some way (in particular the focal-cran40/ part)?
+      repo: "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
+      state: present
+  - name: Call apt update
+    command: "apt update"
+  - name: Install R packages and Tidyverse dev dependencies
+    # using Ansible's "apt:" function is nicer than "command:"
+    # but Ansible 2.9 does not provide the allow_downgrades
+    # option, which we need.
+    command: "apt install --yes --allow-downgrades r-base r-base-dev r-recommended libxml2-dev libcurl4-openssl-dev libssl-dev"
+  - name: Install RStudio
+    apt:
+      # TODO: should this become configurable in some way, in particular the package version?
+      deb: "https://download1.rstudio.org/electron/focal/amd64/rstudio-2023.09.0-463-amd64.deb"
+      allow_unauthenticated: yes
+  when: req.r is defined

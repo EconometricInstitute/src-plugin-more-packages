@@ -1,4 +1,65 @@
 ---
+apt:
+  repo_keys: 
+  # VS-Code
+  - BC528686B50D79E339D3721CEB3E94ADBE1229CF
+  # Adoptium
+  - 3B04D753C9050D9A5D343F39843C48A565F8F04B
+  repos:
+  - 'deb http://archive.ubuntu.com/ubuntu focal main multiverse universe restricted'
+  - 'deb http://archive.ubuntu.com/ubuntu focal-security main multiverse universe restricted'
+  - 'deb http://archive.ubuntu.com/ubuntu focal-backports main multiverse universe restricted'
+  - 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
+  - 'deb [arch=amd64] https://packages.adoptium.net/artifactory/deb focal main'
+  packages:
+  - ncdu
+  # Some useful commandline utilities
+  - mc
+  - htop
+  # Standard development stuff
+  - build-essential
+  - gfortran
+  - cmake
+  - automake
+  - llvm
+  - clang
+  # Fake Matlab
+  - octave
+  # Visual Studio Code
+  - code
+  # Java & OpenJDK
+  - maven
+  - temurin-17-jdk
+  deb:
+  # Dropbox
+  - https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+
+miniconda:
+  name: custom-kernel
+  channels:
+  - conda-forge
+  - defaults
+  dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - seaborn
+  - statsmodels
+  # to create ipython-kernels you will always need the package ipykernel
+  - ipykernel
+  # After conda-packages pip-packages can still be installed
+  # so install pip ...
+  - pip
+  # ... and tell conda to use it:
+  # - pip:
+  #   - requests
+  #   - ...
+  prefix: /etc/miniconda/envs
+
+
 snap:
   # The classic part is used for snaps that must be installed using the --classic flag
   classic:
@@ -9,5 +70,6 @@ snap:
   - postman
 
 r:
+ packages:
  - tidyverse
  - tinymodels
