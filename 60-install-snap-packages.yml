@@ -1,14 +1,12 @@
 ---
-- name: Install required snap packages
+- name "Install classic and regular snap packages"
   block:
-  - name "Install classic and regular snap packages"
-    block:
-    - name: Install classic snap packages
-      command: "snap install {{item}} --classic"
-      with_items: "{{req.snap.classic}}"
-      when: req.snap.classic is defined
-    - name: Install regular snap packages
-      command: "snap install {{item}}"
-      with_items: "{{req.snap.regular}}"
-      when: req.snap.regular is defined    
-    when: req.snap is defined
+  - name: Install classic snap packages
+    command: "snap install {{item}} --classic"
+    with_items: "{{req.snap.classic}}"
+    when: req.snap.classic is defined
+  - name: Install regular snap packages
+    command: "snap install {{item}}"
+    with_items: "{{req.snap.regular}}"
+    when: req.snap.regular is defined    
+  when: req.snap is defined
