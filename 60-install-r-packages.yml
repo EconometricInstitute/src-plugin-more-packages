@@ -2,6 +2,6 @@
 - name: Install R packages into the system library
   block:
   - name: Install R-packages globally
-    command: "Rscript -e \"install.packages(commandArgs(trainlingOnly=TRUE), lib='/usr/lib/R/library')\" {{item}}"
+    command: "Rscript -e \"install.packages(commandArgs(trailingOnly=TRUE), lib='/usr/lib/R/library')\" {{item}}"
     with_items: "{{req.r.packages}}"       
   when: req.r.packages is defined
